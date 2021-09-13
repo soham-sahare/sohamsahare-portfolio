@@ -13,11 +13,9 @@ const PORT = process.env.PORT || 3000;
 const dotenv = require("dotenv")
 dotenv.config()
 
-// Static Files
 app.use(express.static('public'));
 app.use(formidable());
 
-// Set View's
 app.set('views', './views');
 
 app.use(bodyParser.json());
@@ -25,7 +23,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(upload.array());
 
-// Navigation
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html')
 });
