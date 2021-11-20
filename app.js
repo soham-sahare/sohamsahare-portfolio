@@ -77,9 +77,12 @@ app.post('/contact', (req, res) => {
 });
 
 app.post('/message', (req, res) => {
-    var email = req.body.email
-    var message = req.body.message
+
+    let email = req.body.email
+    let message = req.body.message
     
+    let subject = "Thank you for contacting"
+
     var transporter = nodemailer.createTransport({
         host: "smtp-mail.outlook.com",
         port: 587,
@@ -93,7 +96,7 @@ app.post('/message', (req, res) => {
         from: 'soham.sahare@vit.edu.in',
         to: email,
         cc: 'sohamsahare123@gmail.com',
-        subject: "Thank you for contacting.",
+        subject: subject,
         text: message
     };
 
@@ -104,8 +107,10 @@ app.post('/message', (req, res) => {
             console.log('Email sent: ' + info.response);
         }
     });
+});
 
-}
+
+
 
 app.listen(PORT, () =>
     console.info(`App listening on port ${PORT}`)
