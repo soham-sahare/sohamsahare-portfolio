@@ -76,6 +76,37 @@ app.post('/contact', (req, res) => {
     console.log(JSON.stringify(req.fields));
 });
 
+app.post('/message', (req, res) => {
+    var email = req.body.email
+    var message = req.body.message
+    
+    var transporter = nodemailer.createTransport({
+        host: "smtp-mail.outlook.com",
+        port: 587,
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
+        }
+    });
+
+    var mailOptions = {
+        from: 'soham.sahare@vit.edu.in',
+        to: email,
+        cc: 'sohamsahare123@gmail.com',
+        subject: "Thank you for contacting.",
+        text: message
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+
+}
+
 app.listen(PORT, () =>
     console.info(`App listening on port ${PORT}`)
 )
